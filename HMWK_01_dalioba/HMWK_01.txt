@@ -1,0 +1,251 @@
+#----------------------------------------------------------------------
+Programming Assignment 01
+
+#----------------------------------------------------------------------
+Purpose:
+
+  * Demonstrate (elementary) understanding of Regular Expressions
+    and how to use them in various useful languages.
+
+#----------------------------------------------------------------------
+Background:
+
+  * The input file will have multiple proposed tokens on each
+    line.  There also might be lines with no proposed tokens
+    and / or just some or maybe extra whitespace.
+
+  * The proposed tokens will be separated by whitespace, which is
+    to be ignored.
+
+  * Your programs will consider successive tokens from the input
+    file and classify them as "Tent", "AitchPi", "Juggle", or
+    'does not match'.
+
+  * An "Tent" is an plus sign '+', followed by zero or more dollar
+    signs '$', followed by one or more octal digits '0' through
+    '7' or lowercase letters 'g' through 'n', followed by
+    a caret '^'.
+
+  * An "AitchPi" is zero or more hexadecimal digits ('0' through
+    '9', 'a' through 'f', 'A' through 'F') followed by a right
+    bracket ']', followed by a left parenthesis '(',
+    followed by zero or more of the letters 'q' through 'z' or 'Q'
+    through 'Z'.
+
+  * A "Juggle" is a left parenthesis '(' followed by one or more
+    uppercase letters 'N' through 'Z' or lowercase letters 'a'
+    through 'm', followed by an octothorpe character '#'.
+
+#----------------------------------------------------------------------
+Examples:
+
+    +0^         -- legal Tent
+    +$$7h^      -- legal Tent
+    +$$$1g2h3i^ -- legal Tent
+
+    $gn^        -- illegal Tent, no + at front
+    +JKL^       -- illegal Tent, JKL are uppercase
+    +$abc^      -- illegal Tent, abc are not in g through n
+
+    0](s                                -- legal AitchPi
+    abcdef](qRsTuV                      -- legal AitchPi
+    0123456789ABCDEF](QQQzzz            -- legal AitchPi
+
+    q](         -- illegal AitchPi, q is not a hexadecimal digit
+    (]rY        -- illegal AitchPi, (] is not ](
+    01](a       -- illegal AitchPi, a is not in 'q' through 'z'
+
+    (amNZ#      -- legal Juggle
+    (mPlOkN#    -- legal Juggle
+    (R#         -- legal Juggle
+
+    (BEEFy)     -- illegal Juggle, ) is not #
+    (#a         -- illegal Juggle, s is after #
+    (WRONG#     -- illegal Juggle, g is uppercase
+
+#----------------------------------------------------------------------
+Tasks:
+
+  1. Download HMWK_01_dalioba.zip from Canvas.
+
+  2. Unzip the file somewhere convenient.
+
+  3. Change 'dalioba' in the name of the directory to your NetID.
+     (Your NetID is three letters followed by four or five digits.
+      The directory name will now be something like
+      'hmwk_01_abc1234', with YOUR NetID instead of 'abc1234'.)
+
+  4. Look in that directory.
+
+  5. Change the header lines in the skeleton files
+     hmwk_01.py / .cs / .c.
+
+      -- Line 1:  Family name first, then a comma, then
+                  personal name.
+
+      -- Line 2:  Your NetID.
+
+      -- Line 3:  The date you edited the file.
+
+  6. Run the files you just changed with the provided
+     'inputdata.text' as the input file.
+
+  7. Observe the following output (it will be the same no matter
+     which language you picked):
+
+processing tokens from inputdata.txt ...
+>+0^< is the proposed token.
+>+$$7h^< is the proposed token.
+>+$$$1g2h3i^< is the proposed token.
+>$gn^< is the proposed token.
+>+JKL^< is the proposed token.
+>+$abc^< is the proposed token.
+>0](s< is the proposed token.
+>abcdef](qRsTuV< is the proposed token.
+>0123456789ABCDEF](QQQzzz< is the proposed token.
+>q](< is the proposed token.
+>(]rY< is the proposed token.
+>01](a< is the proposed token.
+>(amNZ#< is the proposed token.
+>(mPlOkN#< is the proposed token.
+>(R#< is the proposed token.
+>(BEEFy)< is the proposed token.
+>(#a< is the proposed token.
+>(WRONG#< is the proposed token.
+
+  8. Now, change the contents of processToken() function in each
+     of the hmwk_01.py, .cs, and .c files to use the regular
+     expression support of the corresponding language so that the
+     following output is generated for the 'inputdata.txt' test
+     case file.
+
+processing tokens from inputdata.txt ...
+>+0^< matches Tent.
+>+$$7h^< matches Tent.
+>+$$$1g2h3i^< matches Tent.
+>$gn^< does not match.
+>+JKL^< does not match.
+>+$abc^< does not match.
+>0](s< matches AitchPi.
+>abcdef](qRsTuV< matches AitchPi.
+>0123456789ABCDEF](QQQzzz< matches AitchPi.
+>q](< does not match.
+>(]rY< does not match.
+>01](a< does not match.
+>(amNZ#< matches Juggle.
+>(mPlOkN#< matches Juggle.
+>(R#< matches Juggle.
+>(BEEFy)< does not match.
+>(#a< does not match.
+>(WRONG#< does not match.
+
+  9. You should get the same output for each of the three
+     languages.  Make your output match this format EXACTLY since
+     when your solutions are tested, their output will be checked
+     using diff.
+
+#----------------------------------------------------------------------
+Submission:
+
+Make a zipfile of your 'hmwk_01_abc1234' directory (where
+'abc1234' is replaced with YOUR NetID) and submit it on Canvas
+as your results for this assignment.  Your submission should be a
+zipfile that has exactly one item in it, a directory named
+'hmwk_01_abc1234' (where 'abc1234' is YOUR NetID).  Inside that
+directory should be three source files, hmwk_01.py, hmwk_01.cs,
+and hmwk_01.c.
+
+#----------------------------------------------------------------------
+Hints:
+  1. Ensure your programs compile and run correctly.  Not
+     compiling or not generating the correct output will cost you
+     points.
+
+     Ensure your output messages match the format shown above when
+     you change the processToken() function.  The output is going
+     to be checked by a program, so it has to match EXACTLY.
+
+     After you write your programs, use diff or fc to compare
+     your output to the supplied 'outputdata.txt'.  It must match
+     EXACTLY or you will be penalized points.
+
+     ('EXACTLY' means character-by-character the same.  No, e.g.,
+      differences in spacing, no changes in wording, no changes
+      in punctuation, no changes in capitalization, and so forth.
+      Check your output against the 'outputdata.txt' file!)
+
+  2. Ensure that you update the three header lines in each of the
+     source files with YOUR name (family name first, then a comma,
+     then your personal name), YOUR NetID, and the date you edit
+     the file.
+
+     Not updating the header lines properly will cost you points.
+
+  3. DO NOT change anything in the 'Main' (C#) or 'main' (C,
+     Python) functions.  Those routines will pump the proposed
+     tokens into the processToken() function for you.
+
+     Your programs will be tested from the command line.  If they
+     do not run correctly when run that way, you will score
+     ZERO points.
+
+  4. You might use some lines of static code aside from changing
+     the contents of processToken().  (This will depend on how you
+     decide to do the regular expressions.)
+
+  5. Ensure you use the regular expression support of the
+     language.  Programs that do not do all of their matching
+     using the regular expression support of the corresponding
+     language will score ZERO points.
+
+  6. These programs are not complex.  The processToken() routine
+     in the C# reference solution is 14 lines of code, including
+     some static data.
+
+     For Python, it's 12 lines of code, including some static data.
+
+     The processToken() routine in the C reference solution is 12
+     lines of code.  There are three additional lines of static
+     data and 12 lines of initialization code at the beginning of
+     the C main function.
+
+     If you find yourself writing lots more code than this, you're
+     probably going down the wrong path.
+
+  7. After you write your regular expressions, make up some test
+     cases of your own to ensure that your REs really match the
+     descriptions given above.  The test cases in 'inputdata.txt'
+     are useful, but they are NOT comprehensive.  Make up some
+     more of your own.
+
+  8. Ensure your submission to Canvas is packaged EXACTLY as
+     described above.
+
+      -- Your submission should be a ZIP FILE (not a tar, rar, gz,
+         or any other kind of compressed file).
+
+      -- The zip file should be named 'hmwk_01_abc1234.zip' (with
+         'abc1234' replaced with YOUR NetID).
+
+      -- This zip file should have ONE item in it, a directory
+         named 'hmwk_01_abc1234'  (with 'abc1234' replaced with
+         YOUR NetID).
+
+      -- Your source files should be in that directory.  The
+         source files should be named hmwk_01.py / .cs / .c.
+
+     Submissions in the wrong format score ZERO points.
+
+  9. After you submit your zip file on Canvas, download it from
+     Canvas and check that your submission is in the proper
+     format, that the programs run and print the correct output,
+     and that you updated the header lines correctly in each of
+     the source files.
+
+ 10. Are you CERTAIN you complied with all of these nit-picking
+     instructions?  Really?  Maybe you ought to check just one
+     more time. :)
+
+#----------------------------------------------------------------------
+
+

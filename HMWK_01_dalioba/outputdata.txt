@@ -1,0 +1,19 @@
+processing tokens from inputdata.txt ...
+>+0^< matches Tent.
+>+$$7h^< matches Tent.
+>+$$$1g2h3i^< matches Tent.
+>$gn^< does not match.
+>+JKL^< does not match.
+>+$abc^< does not match.
+>0](s< matches AitchPi.
+>abcdef](qRsTuV< matches AitchPi.
+>0123456789ABCDEF](QQQzzz< matches AitchPi.
+>q](< does not match.
+>(]rY< does not match.
+>01](a< does not match.
+>(amNZ#< matches Juggle.
+>(mPlOkN#< matches Juggle.
+>(R#< matches Juggle.
+>(BEEFy)< does not match.
+>(#a< does not match.
+>(WRONG#< does not match.
